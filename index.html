@@ -74,6 +74,56 @@
             document.getElementById('login').classList.toggle('active');
             document.getElementById('signup').classList.toggle('active');
         }
-    </script>
+    </script><script type="module">
+  // Importation des modules Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+  // Configuration Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBzMi3F5vLM0bYxTY1KuBJf7eD6Nx96wsQ",
+    authDomain: "login-ec53a.firebaseapp.com",
+    projectId: "login-ec53a",
+    storageBucket: "login-ec53a.appspot.com",
+    messagingSenderId: "123644267529",
+    appId: "1:123644267529:web:5409efdf896971c655bcd8"
+  };
+
+  // Initialisation de Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Inscription d'un utilisateur
+  document.getElementById("signup-btn").addEventListener("click", function (event) {
+    event.preventDefault();
+    let email = document.getElementById("signup-email").value;
+    let password = document.getElementById("signup-password").value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("Compte créé avec succès !");
+      })
+      .catch((error) => {
+        alert("Erreur : " + error.message);
+      });
+  });
+
+  // Connexion d'un utilisateur
+  document.getElementById("login-btn").addEventListener("click", function (event) {
+    event.preventDefault();
+    let email = document.getElementById("login-email").value;
+    let password = document.getElementById("login-password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert("Connexion réussie !");
+      })
+      .catch((error) => {
+        alert("Erreur : " + error.message);
+      });
+  });
+
+</script>
+
 </body>
 </html>
